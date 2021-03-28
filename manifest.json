@@ -1,0 +1,22 @@
+{
+    "name": "Sharing is caring",
+    "description": "Sharing ressources from Linkedin!",
+    "version": "1.0",
+    "manifest_version": 3,
+    "permissions": [
+        "activeTab",
+        "storage",
+        "declarativeContent"
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "Click here to open menu"
+    },
+    "content_scripts": [
+        {
+          "matches": ["https://*.linkedin.com/*"],
+          "js": ["addLogo.js"],
+          "run_at": "document_idle"
+        }
+    ]
+}
