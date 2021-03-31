@@ -1,29 +1,25 @@
+window.onload = init;
 
-var observer = new MutationObserver((mutations) => {
-  mutations.forEach(mutation => {
-    let target = document.querySelectorAll('[type=ellipsis-horizontal-icon')
-    if(target.length > 0) {
-      post.observe(target[0], {childList: true})
-    };
-  })
-})
-
-var post = new MutationObserver((mutations) => {
-  let selectors = document.querySelectorAll('[type=ellipsis-horizontal-icon')
-  if(selectors.length > 0) {
-    selectors.forEach(s => {
+const observer = new MutationObserver(() => {
+  let target = document.querySelectorAll('[type=ellipsis-horizontal-icon')
+  if(target.length > 0) {
+    target.forEach(s => {
       let loadButton = document.createElement('button');
       loadButton.innerText = '💎';
       loadButton.addEventListener('click', handleData);
       s.parentNode.parentNode.prepend(loadButton);
     });
-    post.disconnect();
-  }
+  };
 })
 
-observer.observe(document.body, { 
-  childList: true,
-});
+function init() {
+  const targetNode = document.querySelector("body");
+  const config = {
+    childList: true,
+  }
+
+  observer.observe(targetNode, config);
+}
 
 const handleData = (e) => {
 // e.target.closest('.comments-post-meta__name-text')).innerText) // name of the author of the comments

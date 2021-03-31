@@ -25,7 +25,7 @@ const cleanList = () => {
     generateList().then(list => document.querySelector('#listResources').innerHTML = list.join(''))
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('cleanListResources').addEventListener('click', cleanList);
     generateList().then(list => document.querySelector('#listResources').innerHTML = list.join(''))
 });
