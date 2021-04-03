@@ -13,6 +13,22 @@ async function getLocalStorageValue(key) {
     });
 }
 
+ const addNewLink = (e) => {
+  const dataToSave = {
+    name: e.target.parentNode.parentNode.parentNode.querySelector('.feed-shared-actor__name').innerText,
+    url: window.location.href,
+    tags: [],
+    notes: '',
+  }
+
+  chrome.storage.sync.get(['listResourcesLinkedin'], (result) => {
+    if (result.listResourcesLinkedin === undefined) {
+      result.listResourcesLinkedin = []
+    }
+    chrome.storage.sync.set({listResourcesLinkedin: [...result.listResourcesLinkedin, dataToSave]});
+  });
+}
+
 const generateList = async() => {
     LIST = await getLocalStorageValue('listResourcesLinkedin');
 
@@ -29,3 +45,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('cleanListResources').addEventListener('click', cleanList);
     generateList().then(list => document.querySelector('#listResources').innerHTML = list.join(''))
 });
+
+// Handling tabs switch
+function onTabClick(event) {
+  let activeTabs = document.querySelectorAll('.active');
+
+  activeTabs.forEach(function(tab) {
+    tab.className = tab.className.replace('active', '');
+  });
+
+  event.target.parentElement.className += ' active';
+  document.getElementById(event.target.href.split('#')[1]).className += ' active';
+}
+
+const element = document.getElementById('nav-tab');
+element.addEventListener('click', onTabClick, false);
