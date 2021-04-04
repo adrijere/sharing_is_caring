@@ -15,11 +15,12 @@ async function getLocalStorageValue(key) {
 
  const addNewLink = (e) => {
   const dataToSave = {
-    name: e.target.parentNode.parentNode.parentNode.querySelector('.feed-shared-actor__name').innerText,
-    url: window.location.href,
-    tags: [],
-    notes: '',
+    url: e.target.elements['link'].value,
+    tags: Array.from(e.target.elements['tags'].selectedOptions).map(v => v.value) || [],
+    notes: e.target.elements['notes'].value || '',
   }
+
+  console.log(dataToSave)
 
   chrome.storage.sync.get(['listResourcesLinkedin'], (result) => {
     if (result.listResourcesLinkedin === undefined) {
@@ -32,7 +33,7 @@ async function getLocalStorageValue(key) {
 const generateList = async() => {
     LIST = await getLocalStorageValue('listResourcesLinkedin');
 
-    return LIST.map(li => (`<li><a href='${li.url}' target="_blank">${li.name}</a></li>`))
+    return LIST.map(resource => (`<tr><td>${resource.tags}</td><td>${resource.notes}</td><td><a class="link" href='${resource.url}' target="_blank">> Link</a></td></tr>`))
 }
 
 const cleanList = () => {
@@ -59,4 +60,8 @@ function onTabClick(event) {
 }
 
 const element = document.getElementById('nav-tab');
+const form = document.getElementById('formAddResource');
+
 element.addEventListener('click', onTabClick, false);
+form.addEventListener('submit', addNewLink);
+

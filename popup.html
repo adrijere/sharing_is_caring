@@ -5,31 +5,32 @@
     <title>Sharing is caring!</title>
   </head>
   <body>
-    <h2>SOCIALGEMS</h2>
-    <h4>Collect the best ressources from Linkedin</h4>
+    <div id='header'>
+      <h2>🤟 SocialGems</h2>
+      <h4 class='subtitle'>Collect the best ressources from Linkedin</h4>
+    </div>
      
     <div class="container">
       <!-- Tabs -->
       <ul id="nav-tab" class="nav">
-        <li class="active"><a href="#newsource">Add a new source</a></li>
-        <li><a href="#list">Your List</a></li>
-        <li><a href="#aboutus">About Us</a></li>
+        <li class="active"><a href="#newsource">Add a new resource</a></li>
+        <li><a href="#list">Your list(s)</a></li>
+        <li><a href="#aboutus">About us</a></li>
       </ul>
       
       <!-- Tab panes -->
       <div class="tab-content">
         <div class="tab-pane active" id="newsource">
-          <h4>Add a new source</h4> 
-          <form>
+          <form id='formAddResource'>
             <label for="link">Link *:</label>
             <input type="url" name="link" id="url"
-            pattern="https://www.linkedin.com/*"
+            pattern="https?:\/\/www.linkedin.com\/.+"
             placeholder="https://www.linkedin.com/"
             required>
             <br/>
             
-            <label for="tag">Tag:</label>
-            <select name="tag" multiple size="3">
+            <label for="tags">Tag:</label>
+            <select name="tags" multiple size="3">
               <option value="nocode">No Code</option>
               <option value="marketing">Marketing</option>
               <option value="crypto">Crypto</option>
@@ -41,20 +42,26 @@
               <option value="ecommercce">E-commerce</option>
           </select><br/>
 
-          <label for="note">Notes:</label>
-          <textarea name='note' rows="4">Add some personal notes</textarea><br/>
+          <label for="notes">Notes:</label>
+          <textarea name='notes' rows="4" placeholder='Add some personal notes'></textarea><br/>
 
-          <button type='submit'>Add</button>
+          <button type='submit' id='addResource'>Add <img src='gift.svg' class='icon'/></button>
           </form>
         </div>
         <div class="tab-pane" id="list">
-          <h4>Your resources:</h4>
-          <div id='listResources'></div>
+          <div>
+            <table class="sortable" id='result'>
+              <tbody id='listResources'>
+              </tbody>
+            </table>
+          </div>
           <button id='cleanListResources'>Clean 🧹</button>
         </div>
         <div class="tab-pane" id="aboutus">
-          <h4>About us</h4>
-          <p>Original idea by <a href='https://www.linkedin.com/in/miguellabranche/' target="_blank">Miguel Labranche</a> and developed by <a href="http://github.com/adrijere" target="_blank">Jérémy Mathon</a></p>
+          <p>
+            Original idea by <a href='https://www.linkedin.com/in/miguellabranche/' target="_blank">Miguel Labranche</a> and <a href='https://www.linkedin.com/in/jordansuccar/' target="_blank">Jordan Succar</a>.<br />
+            Developed by <a href="http://github.com/adrijere" target="_blank">Jérémy Mathon</a>.
+          </p>
         </div>
       </div>
     </div>

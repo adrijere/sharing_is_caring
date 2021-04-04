@@ -1,19 +1,45 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-     color: #444;
-     width: 300px;
-     max-width: 500px;
-     margin: 0 auto;
-     padding: 2px;
-   }
-
-.container {
-    
+    color: #444;
+    margin: 0 auto;
+    width: 300px;
+    padding: 2px;
 }
 
+/* Popup HTML for all tabs */
+#header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#header > h2 {
+    margin-bottom: 0;
+}
+
+#header > h4 { 
+    margin-top: 0;
+}
+
+.icon {
+    width: 17px;
+    height: 17px;
+    padding: 0px 5px;
+}
+
+.subtitle {
+    font-style: italic;
+    color: #7f7f7f;
+    font-weight: lighter;
+}
+
+/* TABS */
 ul {
     list-style: none;
     padding: 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid darkgray;
 }
 
 ul > li {
@@ -25,21 +51,20 @@ ul > li {
     color: #444;
     padding: 10px;
     transition: all .3s ease-in-out;
-    border-bottom: 1px solid darkgray;
 }
 
 .nav a:hover {
-    color: slateblue;
+    color: #3267e2;
 }
 
 .nav .active a { 
-    color: slateblue; 
-    border-bottom: 1px solid slateblue;
+    color: #3267e2;
+    border-bottom: 2px solid #3267e2;
 }
 
 .nav .active a:hover {
     border-color: transparent;
-    background: slateblue;
+    background: #3267e2;
     color: white;
 }
 
@@ -51,12 +76,41 @@ ul > li {
     display: block; 
 }
 
+/* Tab: Add a new resource - FORM */
+select, input, textarea, button {
+    border: 1px #7f7f7f7f solid;
+    border-radius: 5px;
+}
+
+button[type="submit"]{
+    cursor:pointer;
+    color: white;
+    background-color: #3267e2;
+    padding: 5px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.link {
+    color: #3267e2;
+    font-weight: bold;
+    text-decoration: none;
+}
+
 form {
     display: flex;
     flex-direction: column;
 }
 
 select[multiple]:focus option:checked {
-    background: slateblue linear-gradient(0deg, slateblue 0%, slateblue 100%);
+    background:#3267e2 linear-gradient(0deg, #3267e2 0%, #3267e2 100%);
     color: white;
-  }
+}
+
+
+/* TAB: My List */
+#result {
+    width: 100%;
+}
