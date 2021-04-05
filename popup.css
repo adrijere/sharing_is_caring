@@ -33,6 +33,11 @@ body {
     font-weight: lighter;
 }
 
+.flex {
+    display: flex;
+    flex-direction: column;
+}
+
 /* TABS */
 ul {
     list-style: none;
@@ -82,7 +87,7 @@ select, input, textarea, button {
     border-radius: 5px;
 }
 
-button[type="submit"]{
+#cleanListResources, button[type="submit"]{
     cursor:pointer;
     color: white;
     background-color: #3267e2;
