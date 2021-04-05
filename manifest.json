@@ -6,8 +6,12 @@
     "permissions": [
         "activeTab",
         "storage",
-        "declarativeContent"
+        "declarativeContent",
+        "notifications"
     ],
+    "icons" : {
+        "16": "icon.png"
+    },
     "action": {
         "default_popup": "popup.html",
         "default_title": "Click here to open menu"

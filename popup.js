@@ -20,20 +20,20 @@ async function getLocalStorageValue(key) {
     notes: e.target.elements['notes'].value || '',
   }
 
-  console.log(dataToSave)
-
   chrome.storage.sync.get(['listResourcesLinkedin'], (result) => {
     if (result.listResourcesLinkedin === undefined) {
       result.listResourcesLinkedin = []
     }
     chrome.storage.sync.set({listResourcesLinkedin: [...result.listResourcesLinkedin, dataToSave]});
   });
+
+  chrome.notifications.create('1', { title: 'Sharing is caring!', type: 'basic', message: 'Resource added!', iconUrl:'icon.png'})
 }
 
 const generateList = async() => {
     LIST = await getLocalStorageValue('listResourcesLinkedin');
 
-    return LIST.map(resource => (`<tr><td>${resource.tags}</td><td>${resource.notes}</td><td><a class="link" href='${resource.url}' target="_blank">> Link</a></td></tr>`))
+    return LIST.map(resource => (`<div class='row'><div class='col sm tags'>${resource.tags.map(t => `<span class='tag'>${t}</span>`).join(" ")}</div><div class='col md'>${resource.notes}</div><div class='col sm'><a class="link" href='${resource.url}' target="_blank">> Link</a></div></div>`))
 }
 
 const cleanList = () => {

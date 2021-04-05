@@ -2,7 +2,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     color: #444;
     margin: 0 auto;
-    width: 300px;
+    width: 400px;
     padding: 2px;
 }
 
@@ -109,8 +109,34 @@ select[multiple]:focus option:checked {
     color: white;
 }
 
-
 /* TAB: My List */
-#result {
-    width: 100%;
+.row {
+    display: flex;
+    border-bottom: rgba(127, 127, 127, 0.2) 1px solid;
+}
+
+.col {
+padding: 1px;
+overflow-wrap: break-word;
+}
+
+.row .col.sm {
+width: 25%;
+}
+
+.row .col.md {
+width: 50%;
+}
+
+.row + .row {
+margin-top: 5px;
+}
+
+span.tag {
+    background-color: #16baa6;
+    border-radius: 5px;
+    padding: 1px;
+    color: white;
+    font-weight: bold;
+    display: inline-flex;
 }
