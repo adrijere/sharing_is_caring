@@ -3,8 +3,12 @@ body {
     color: #444;
     margin: 0 auto;
     width: 600px;
-    padding: 2px;
     background-color: #FFFDF9;
+}
+
+.container {
+    padding: 20px;
+    padding-bottom: 0px;
 }
 
 /* Popup HTML for all tabs */
@@ -148,6 +152,25 @@ form {
     border: 1px #7f7f7f7f solid;
 }
 
+
+#about-us {
+    background-color: #FFDEA7;
+    bottom: 0;
+    padding: 3px;
+    width: 25%;
+    font-weight: bolder;
+    margin-left: auto;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#about-us > a {
+    text-decoration: none;
+    color: black;
+}
+
 /* TAB: My List */
 .row {
     display: flex;
@@ -178,18 +201,4 @@ span.tag {
     color: #C8891E;
     font-weight: bold;
     display: inline-flex;
-}
-
-#about-us {
-    background-color: #FFDEA7;
-    bottom: 0;
-    padding: 3px;
-    width: 20%;
-    margin-left: auto;
-    border-radius: 4px;
-}
-
-#about-us > a {
-    text-decoration: none;
-    color: black;
 }
