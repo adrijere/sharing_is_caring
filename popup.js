@@ -16,7 +16,7 @@ async function getLocalStorageValue(key) {
  const addNewLink = (e) => {
   const dataToSave = {
     url: e.target.elements['link'].value,
-    tags: Array.from(e.target.elements['tags'].selectedOptions).map(v => v.value) || [],
+    tags: e.target.elements['tags'].value.split(',') || [],
     notes: e.target.elements['notes'].value || '',
   }
 
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Handling tabs switch
-function onTabClick(event) {
+const onTabClick = (event) => {
   let activeTabs = document.querySelectorAll('.active');
 
   activeTabs.forEach(function(tab) {
@@ -56,12 +56,24 @@ function onTabClick(event) {
   });
 
   event.target.parentElement.className += ' active';
+  console.log(event.target.href.split('#')[1])
   document.getElementById(event.target.href.split('#')[1]).className += ' active';
 }
 
-const element = document.getElementById('nav-tab');
-const form = document.getElementById('formAddResource');
+const manageTags = (event) => {
+  let tags = [];
+  
+  document.querySelectorAll('.options input[type=checkbox]:checked').forEach(input => tags.push(input.value));
+  const input = document.getElementById('options-selected').value = tags.join(', ');
+}
 
-element.addEventListener('click', onTabClick, false);
+const navBar = document.getElementById('nav-tab');
+const bottomMonkey = document.getElementById('about-us');
+const form = document.getElementById('formAddResource');
+const tags = document.getElementById('tags')
+
+navBar.addEventListener('click', onTabClick, false);
+bottomMonkey.addEventListener('click', onTabClick, false);
 form.addEventListener('submit', addNewLink);
+tags.addEventListener('click', manageTags, false);
 

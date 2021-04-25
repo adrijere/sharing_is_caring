@@ -10,7 +10,7 @@
         "notifications"
     ],
     "icons" : {
-        "16": "icon.png"
+        "16": "ruby.png"
     },
     "action": {
         "default_popup": "popup.html",

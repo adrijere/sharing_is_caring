@@ -3,51 +3,64 @@
     <link rel="stylesheet" href="popup.css">
     <meta charset='UTF-8' />
     <title>Sharing is caring!</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet"> 
   </head>
   <body>
     <div id='header'>
-      <h2>🤟 SocialGems</h2>
-      <h4 class='subtitle'>Collect the best ressources from Linkedin</h4>
+      <h2><img src='ruby.svg' class='icon'/> <span id='header-xl'>SOCIAL</span><span id='header-s'>gems</span></h2>
+      <h4 class='subtitle'>Your little private list of the best LinkedIn ressources</h4>
     </div>
      
     <div class="container">
       <!-- Tabs -->
       <ul id="nav-tab" class="nav">
-        <li class="active"><a href="#newsource">Add a new resource</a></li>
-        <li><a href="#list">Your list(s)</a></li>
-        <li><a href="#aboutus">About us</a></li>
+        <li class="active"><a href="#newsource">➕ Add a new gem</a></li>
+        <li><a href="#list">📎 Your gems list</a></li>
       </ul>
       
       <!-- Tab panes -->
       <div class="tab-content">
         <div class="tab-pane active" id="newsource">
           <form id='formAddResource'>
-            <label for="link">Link *:</label>
+            <label for="link" class='required'>Content Link</label>
             <input type="url" name="link" id="url"
             pattern="https?:\/\/www.linkedin.com\/.+"
-            placeholder="https://www.linkedin.com/"
-            required>
+            placeholder="Link of the LinkedIn comment, post or profile ..."
+            required />
             <br/>
             
-            <label for="tags">Tag:</label>
-            <select name="tags" multiple size="3">
-              <option value="nocode">No Code</option>
-              <option value="marketing">Marketing</option>
-              <option value="crypto">Crypto</option>
-              <option value="sales">Sales</option>
-              <option value="linkedin tips">Linkedin tips</option>
-              <option value="email">Email</option>
-              <option value="webinar">Webinar</option>
-              <option value="newsletter">Newsletter</option>
-              <option value="e-commerce">E-commerce</option>
-          </select><br/>
+            <label for="tags">Tags</label>
+            <input 
+            id='options-selected'
+            placeholder='Select tags'
+            name='tags'
+            readonly
+            />
+            <div class='options' id='tags'>
+            <label><input type="checkbox" value="nocode" />No Code</label>
+              <label><input type="checkbox" value="marketing" />Marketing</label>
+              <label><input type="checkbox" value="crypto" />Crypto</label>
+              <label><input type="checkbox" value="sales" />Sales</label>
+              <label><input type="checkbox" value="linkedin tips" />Linkedin tips</label>
+              <label><input type="checkbox" value="email" />Email</label>
+              <label><input type="checkbox" value="webinar" />Webinar</label>
+              <label><input type="checkbox" value="newsletter" />Newsletter</label>
+              <label><input type="checkbox" value="e-commerce" />E-commerce</label>
+            </div>
+          <br/>
 
-          <label for="notes">Notes:</label>
-          <textarea name='notes' rows="4" placeholder='Add some personal notes'></textarea><br/>
+          <label for="notes">Message</label>
+          <textarea name='notes' rows="4" placeholder='Add a little note to your gem. May be useful when you check it in the future.'></textarea><br/>
 
-          <button type='submit' id='addResource'>Add <img src='gift.svg' class='icon'/></button>
+          <button type='submit' id='addResource'>Add that Gem baby !  💎</button>
           </form>
+
+          <div id='about-us'><a href="#aboutus">🐵 Who f*ck are we ?</a></div>
         </div>
+
         <div class="tab-pane" id="list">
           <div id='listResources'>
           </div>
@@ -55,6 +68,7 @@
             <button id='cleanListResources'>Clean 🧹</button>
           </div>
         </div>
+
         <div class="tab-pane" id="aboutus">
           <p>
             Original idea by <a href='https://www.linkedin.com/in/miguellabranche/' target="_blank">Miguel Labranche</a> and <a href='https://www.linkedin.com/in/jordansuccar/' target="_blank">Jordan Succar</a>.<br />

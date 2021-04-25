@@ -2,8 +2,9 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     color: #444;
     margin: 0 auto;
-    width: 400px;
+    width: 600px;
     padding: 2px;
+    background-color: #FFFDF9;
 }
 
 /* Popup HTML for all tabs */
@@ -11,6 +12,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #FFFFFF;
 }
 
 #header > h2 {
@@ -21,6 +23,18 @@ body {
     margin-top: 0;
 }
 
+#header-xl {
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+}
+
+#header-s {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: lighter;
+    font-size: 28px;
+    font-style: italic;
+}
+
 .icon {
     width: 17px;
     height: 17px;
@@ -28,6 +42,7 @@ body {
 }
 
 .subtitle {
+    font-family: 'Libre Baskerville', serif;
     font-style: italic;
     color: #7f7f7f;
     font-weight: lighter;
@@ -38,13 +53,18 @@ body {
     flex-direction: column;
 }
 
+.required:after {
+    color: #FF6846;
+    content: '*';
+}
+
 /* TABS */
 ul {
     list-style: none;
     padding: 0;
     display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid darkgray;
+    /* justify-content: space-between; */
+    justify-content: space-around;
 }
 
 ul > li {
@@ -59,18 +79,12 @@ ul > li {
 }
 
 .nav a:hover {
-    color: #3267e2;
+    color: #FF6846;
 }
 
 .nav .active a { 
-    color: #3267e2;
-    border-bottom: 2px solid #3267e2;
-}
-
-.nav .active a:hover {
-    border-color: transparent;
-    background: #3267e2;
-    color: white;
+    font-weight: bold;
+    border-bottom: 2px solid #FF6846;
 }
 
 .tab-pane { 
@@ -82,24 +96,35 @@ ul > li {
 }
 
 /* Tab: Add a new resource - FORM */
+
+label {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    padding-bottom: 10px;
+}
+
 select, input, textarea, button {
     border: 1px #7f7f7f7f solid;
-    border-radius: 5px;
+    border-radius: 4px;
+    padding: 10px;
 }
 
 #cleanListResources, button[type="submit"]{
     cursor:pointer;
     color: white;
-    background-color: #3267e2;
+    background-color: #FF6846;
     padding: 5px;
     font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .link {
-    color: #3267e2;
+    color: #FF6846;
     font-weight: bold;
     text-decoration: none;
 }
@@ -109,9 +134,18 @@ form {
     flex-direction: column;
 }
 
-select[multiple]:focus option:checked {
-    background:#3267e2 linear-gradient(0deg, #3267e2 0%, #3267e2 100%);
-    color: white;
+.options {
+    display: none;
+    flex-direction: column;
+}
+
+#options-selected:focus + .options,
+.options:hover {
+    display: flex;
+    background-color: white;
+    border-radius: 4px;
+    padding: 1px;
+    border: 1px #7f7f7f7f solid;
 }
 
 /* TAB: My List */
@@ -138,10 +172,24 @@ margin-top: 5px;
 }
 
 span.tag {
-    background-color: #16baa6;
-    border-radius: 5px;
+    background-color: #FFDEA7;
+    border-radius: 4px;
     padding: 1px;
-    color: white;
+    color: #C8891E;
     font-weight: bold;
     display: inline-flex;
+}
+
+#about-us {
+    background-color: #FFDEA7;
+    bottom: 0;
+    padding: 3px;
+    width: 20%;
+    margin-left: auto;
+    border-radius: 4px;
+}
+
+#about-us > a {
+    text-decoration: none;
+    color: black;
 }
