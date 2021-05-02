@@ -1,5 +1,3 @@
-// window.onload = init;
-
 // const observer = new MutationObserver(() => {
 //   let target = document.querySelectorAll('[type=ellipsis-horizontal-icon')
 //   if(target.length > 0) {
@@ -35,3 +33,33 @@
 //     chrome.storage.sync.set({listResourcesLinkedin: [...result.listResourcesLinkedin, dataToSave]});
 //   });
 // }
+
+async function getLocalStorageValue(key) {
+    return new Promise((resolve, reject) => {
+        try {
+            chrome.storage.sync.get(key, function (result) {
+                resolve(result[key]);
+            })
+        }
+        catch (ex) {
+            reject(ex);
+        }
+    });
+}
+
+const analyzeResource = (url) => {
+    console.log(url);
+}
+
+const init = () => {
+    console.log('Running content script')
+
+    chrome.storage.sync.get('listResourcesLinkedin', (result) => {
+        console.log(typeof(result))
+        result.listResourcesLinkedin.forEach(resource => {
+            analyzeResource(resource.url);
+        })
+    });
+}
+
+init();

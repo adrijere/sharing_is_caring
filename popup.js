@@ -27,7 +27,7 @@ async function getLocalStorageValue(key) {
     chrome.storage.sync.set({listResourcesLinkedin: [...result.listResourcesLinkedin, dataToSave]});
   });
 
-  chrome.notifications.create('1', { title: 'Sharing is caring!', type: 'basic', message: 'Resource added!', iconUrl:'icon.png'})
+  chrome.notifications.create('1', { title: 'SocialGems', type: 'basic', message: 'Resource added!', iconUrl:'ruby.png'})
 }
 
 const generateList = async() => {

@@ -11,3 +11,8 @@ If you want to get the extension and use it with the `developer mode`, you shoul
 - Select the `sharing_is_caring` folder
 
 Your browser will immediately be updated with the icon on the upper right corner with your other installed extensions.
+
+# How the extension is working
+A user can create a resource for Linkedin website.
+Each time a new resource is added by the user, the background script is sending a message through the Chrome API to the content script.
+The content script will scrape the URL sent by the background script and will return the data via message with the Chrome API.

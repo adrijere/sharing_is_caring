@@ -113,6 +113,11 @@ select, input, textarea, button {
     padding: 10px;
 }
 
+textarea {
+    resize: none;
+    font-family: inherit;
+}
+
 #cleanListResources, button[type="submit"]{
     cursor:pointer;
     color: white;
@@ -141,6 +146,8 @@ form {
 .options {
     display: none;
     flex-direction: column;
+    overflow-y: scroll;
+    height: 15vh;
 }
 
 #options-selected:focus + .options,
