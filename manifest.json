@@ -19,7 +19,7 @@
     "content_scripts": [
         {
           "matches": ["https://*.linkedin.com/*"],
-          "js": ["addLogo.js"],
+          "js": ["getInformationsFromUrl.js"],
           "run_at": "document_idle"
         }
     ]

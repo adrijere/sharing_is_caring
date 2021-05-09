@@ -13,11 +13,27 @@ async function getLocalStorageValue(key) {
     });
 }
 
+const defineTypeOfUrl = (url) => {
+  let type;
+
+  console.log(url);
+  if (url.includes('/in/')) {
+    type = `😎`;
+  } else if (url.includes('comment')) {
+    type = `💬`;
+  } else {
+    type = `📝`;
+  }
+
+  return type;
+}
+
  const addNewLink = (e) => {
   const dataToSave = {
     url: e.target.elements['link'].value,
     tags: e.target.elements['tags'].value.split(',') || [],
     notes: e.target.elements['notes'].value || '',
+    type: defineTypeOfUrl(e.target.elements['link'].value),
   }
 
   chrome.storage.sync.get(['listResourcesLinkedin'], (result) => {
@@ -27,13 +43,19 @@ async function getLocalStorageValue(key) {
     chrome.storage.sync.set({listResourcesLinkedin: [...result.listResourcesLinkedin, dataToSave]});
   });
 
+  chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+    chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, (response) => {
+      console.log(response.farewell);
+    });
+  });
+
   chrome.notifications.create('1', { title: 'SocialGems', type: 'basic', message: 'Resource added!', iconUrl:'ruby.png'})
 }
 
 const generateList = async() => {
     LIST = await getLocalStorageValue('listResourcesLinkedin');
 
-    return LIST.map(resource => (`<div class='row'><div class='col sm tags'>${resource.tags.map(t => `<span class='tag'>${t}</span>`).join(" ")}</div><div class='col md'>${resource.notes}</div><div class='col sm'><a class="link" href='${resource.url}' target="_blank">> Link</a></div></div>`))
+    return LIST.map(resource => (`<div class='row'><div class='col sm tags'>${resource.tags.map(t => `<span class='tag'>${t}</span>`).join(" ")}</div><div class='col sm'>${resource.type}</div><div class='col md'>${resource.notes}</div><div class='col sm'><a class="link" href='${resource.url}' target="_blank">> Link</a></div></div>`))
 }
 
 const cleanList = () => {

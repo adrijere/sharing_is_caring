@@ -34,25 +34,8 @@
 //   });
 // }
 
-async function getLocalStorageValue(key) {
-    return new Promise((resolve, reject) => {
-        try {
-            chrome.storage.sync.get(key, function (result) {
-                resolve(result[key]);
-            })
-        }
-        catch (ex) {
-            reject(ex);
-        }
-    });
-}
-
-const analyzeResource = (url) => {
-    console.log(url);
-}
-
-const init = () => {
-    console.log('Running content script')
+const analyzeUrl = (url) => {
+    console.log(`Analyze url: ${url}`)
 
     chrome.storage.sync.get('listResourcesLinkedin', (result) => {
         console.log(typeof(result))
@@ -62,4 +45,13 @@ const init = () => {
     });
 }
 
-init();
+
+chrome.runtime.onConnect.addListener((port) => {
+  port.onMessage.addListener((msg) => {
+    port.postMessage({counter: msg.counter+1});
+  });
+});
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    sendResponse({counter: request.counter+1});
+});
