@@ -45,13 +45,15 @@ const analyzeUrl = (url) => {
     });
 }
 
-
-chrome.runtime.onConnect.addListener((port) => {
-  port.onMessage.addListener((msg) => {
-    port.postMessage({counter: msg.counter+1});
-  });
-});
-
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    sendResponse({counter: request.counter+1});
-});
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log(sender.tab ?
+                "from a content script:" + sender.tab.url :
+                "from the extension");
+    console.log("Request: ", request);
+    console.log(document.href, window)
+    if (request.message == "newLinkAdded") {
+      sendResponse(analyzeUrl(request.url));
+    }
+  }
+);

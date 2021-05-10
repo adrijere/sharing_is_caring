@@ -16,3 +16,8 @@ Your browser will immediately be updated with the icon on the upper right corner
 A user can create a resource for Linkedin website.
 Each time a new resource is added by the user, the background script is sending a message through the Chrome API to the content script.
 The content script will scrape the URL sent by the background script and will return the data via message with the Chrome API.
+
+# TO DO
+[] Add the gem emoji on the DOM directly thanks to the content-script
+[] When the user clicks on the emoji, the popup appears and ask for tags and description
+[] Get image + name of the owner of the post/profile/comment

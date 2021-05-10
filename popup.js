@@ -16,7 +16,6 @@ async function getLocalStorageValue(key) {
 const defineTypeOfUrl = (url) => {
   let type;
 
-  console.log(url);
   if (url.includes('/in/')) {
     type = `😎`;
   } else if (url.includes('comment')) {
@@ -29,11 +28,12 @@ const defineTypeOfUrl = (url) => {
 }
 
  const addNewLink = (e) => {
+  const url = e.target.elements['link'].value;
   const dataToSave = {
-    url: e.target.elements['link'].value,
+    url: url,
     tags: e.target.elements['tags'].value.split(',') || [],
     notes: e.target.elements['notes'].value || '',
-    type: defineTypeOfUrl(e.target.elements['link'].value),
+    type: defineTypeOfUrl(url),
   }
 
   chrome.storage.sync.get(['listResourcesLinkedin'], (result) => {
@@ -43,13 +43,13 @@ const defineTypeOfUrl = (url) => {
     chrome.storage.sync.set({listResourcesLinkedin: [...result.listResourcesLinkedin, dataToSave]});
   });
 
-  chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-    chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, (response) => {
-      console.log(response.farewell);
-    });
-  });
+  // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+  //   chrome.tabs.sendMessage(tabs[0].id, {message: "newLinkAdded", url: url}, (response) => {
+  //     console.log("Response from content script : ", response);
+  //   });
+  // });
 
-  chrome.notifications.create('1', { title: 'SocialGems', type: 'basic', message: 'Resource added!', iconUrl:'ruby.png'})
+  chrome.notifications.create('1', { title: 'SocialGems', type: 'basic', message: 'Resource added!', iconUrl:'images/ruby.png'})
 }
 
 const generateList = async() => {
@@ -78,7 +78,6 @@ const onTabClick = (event) => {
   });
 
   event.target.parentElement.className += ' active';
-  console.log(event.target.href.split('#')[1])
   document.getElementById(event.target.href.split('#')[1]).className += ' active';
 }
 
