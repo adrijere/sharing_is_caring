@@ -1,5 +1,3 @@
-let LIST = []
-
 async function getLocalStorageValue(key) {
     return new Promise((resolve, reject) => {
         try {
@@ -31,7 +29,7 @@ const defineTypeOfUrl = (url) => {
   const url = e.target.elements['link'].value;
   const dataToSave = {
     url: url,
-    tags: e.target.elements['tags'].value.split(',') || [],
+    tags: e.target.elements['tags'].value.split(',').filter(v => v) || [],
     notes: e.target.elements['notes'].value || '',
     type: defineTypeOfUrl(url),
   }
@@ -49,17 +47,16 @@ const defineTypeOfUrl = (url) => {
   //   });
   // });
 
-  chrome.notifications.create('1', { title: 'SocialGems', type: 'basic', message: 'Resource added!', iconUrl:'images/ruby.png'})
+  chrome.notifications.create('1', { title: 'SocialGems', type: 'image', message: 'Resource added!', iconUrl:'./images/ruby.png'})
 }
 
 const generateList = async() => {
-    LIST = await getLocalStorageValue('listResourcesLinkedin');
+    resourcesList = await getLocalStorageValue('listResourcesLinkedin') || [];
 
-    return LIST.map(resource => (`<div class='row'><div class='col sm tags'>${resource.tags.map(t => `<span class='tag'>${t}</span>`).join(" ")}</div><div class='col sm'>${resource.type}</div><div class='col md'>${resource.notes}</div><div class='col sm'><a class="link" href='${resource.url}' target="_blank">> Link</a></div></div>`))
+    return (resourcesList || []).map(resource => (`<div class='row'><div class='col sm tags'>${resource.tags.map(t => `<span class='tag'>${t}</span>`).join(" ")}</div><div class='col sm'>${resource.type}</div><div class='col md'>${resource.notes}</div><div class='col sm'><a class="link" href='${resource.url}' target="_blank">> Link</a></div></div>`))
 }
 
 const cleanList = () => {
-    LIST = []
     chrome.storage.sync.set({listResourcesLinkedin: []});
     generateList().then(list => document.querySelector('#listResources').innerHTML = list.join(''))
 }
@@ -81,20 +78,86 @@ const onTabClick = (event) => {
   document.getElementById(event.target.href.split('#')[1]).className += ' active';
 }
 
-const manageTags = (event) => {
-  let tags = [];
-  
-  document.querySelectorAll('.options input[type=checkbox]:checked').forEach(input => tags.push(input.value));
-  const input = document.getElementById('options-selected').value = tags.join(', ');
-}
-
 const navBar = document.getElementById('nav-tab');
 const bottomMonkey = document.getElementById('about-us');
 const form = document.getElementById('formAddResource');
-const tags = document.getElementById('tags')
 
 navBar.addEventListener('click', onTabClick, false);
 bottomMonkey.addEventListener('click', onTabClick, false);
 form.addEventListener('submit', addNewLink);
-tags.addEventListener('click', manageTags, false);
 
+// tag handling
+
+var tags = [];
+var $container = document.querySelector('.tag-field');
+var $input = document.querySelector('.tag-field input');
+var $tags = document.querySelector('.js-tags');
+var $tagsList = document.getElementById('tags');
+
+$container.addEventListener('keydown', function(evt) {
+  if ( !evt.target.matches('.js-tag-input') ) {
+    return;
+  }
+  
+  // if the keyCode is `,`
+  if ( evt.keyCode !== 188 ) {
+    return;
+  }
+  
+  var value = String(evt.target.value);
+  
+  if (!value.length) {
+    return;
+  }
+  
+  tags.push(evt.target.value);
+  render(tags, $tags);
+  $input.value = '';
+});
+
+$container.addEventListener('keydown', function(evt) {
+  if ( !evt.target.matches('.js-tag-input') ) {
+    return;
+  }
+  
+    // if the keyCode is `ESC`
+  if ( evt.keyCode !== 8 ) {
+    return;
+  }
+  
+  if ( String(evt.target.value).length ) {
+    return;
+  }
+  
+  tags = tags.slice(0, tags.length - 1);
+  $input.value = '';
+  render(tags, $tags);
+});
+
+$container.addEventListener('click', function(evt) {
+  if ( evt.target.matches('.js-tag-close') || evt.target.matches('.js-tag') ) {
+    tags = tags.filter(function(tag, i) {
+      return i != evt.target.getAttribute('data-index');
+    });
+    render(tags, $tags);
+  }
+}, true);
+ 
+
+function render(tags, el) {
+  $tagsList.value = '';
+
+  el.innerHTML = tags.map(function(tag, i) {
+    $tagsList.value += `${tag},`;
+
+    return (
+      '<div class="tag js-tag" data-index="' + i + '">' +
+        tag +
+        '<span class="tag-close js-tag-close" data-index="' + i + '">×</span>' +
+      '</div>'
+   );
+  }).join('') + ('<div><input placeholder="Enter new tag..." class="js-tag-input"></div>')
+  ;
+  
+  $container.querySelector('.js-tag-input').focus();
+}

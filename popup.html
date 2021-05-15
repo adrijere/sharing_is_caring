@@ -33,24 +33,11 @@
             <br/>
             
             <label for="tags">Tags</label>
-            <input 
-            id='options-selected'
-            placeholder='Add a category to your content'
-            name='tags'
-            readonly
-            />
-            <div class='options' id='tags'>
-            <label><input type="checkbox" value="nocode" />No Code</label>
-              <label><input type="checkbox" value="marketing" />Marketing</label>
-              <label><input type="checkbox" value="crypto" />Crypto</label>
-              <label><input type="checkbox" value="sales" />Sales</label>
-              <label><input type="checkbox" value="linkedin tips" />Linkedin tips</label>
-              <label><input type="checkbox" value="email" />Email</label>
-              <label><input type="checkbox" value="webinar" />Webinar</label>
-              <label><input type="checkbox" value="newsletter" />Newsletter</label>
-              <label><input type="checkbox" value="e-commerce" />E-commerce</label>
+            <div class="tag-field js-tags" >
+              <input class="js-tag-input without-tag" placeholder="Enter new tag and separate them with ," name='tags' />
             </div>
-          <br/>
+            <input class='hidden' id='tags'/>
+            <br/>
 
           <label for="notes">Message</label>
           <textarea name='notes' rows="4" placeholder='Add a little note to your gem. May be useful when you check it in the future.'></textarea><br/>
