@@ -7,19 +7,27 @@
         "activeTab",
         "storage",
         "declarativeContent",
-        "notifications"
+        "notifications",
     ],
     "icons" : {
         "16": "images/ruby.png"
     },
     "action": {
-        "default_popup": "popup.html",
         "default_title": "Click here to open menu"
     },
     "content_scripts": [
         {
           "matches": ["https://*.linkedin.com/*"],
-          "js": ["getInformationsFromUrl.js"]
+          "js": ["sidebar.js", "getInformationsFromUrl.js"]
+        }
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "web_accessible_resources": [
+        {
+          "resources": [ "popup.html" ],
+          "matches": [ "https://*/*" ]
         }
     ]
 }
