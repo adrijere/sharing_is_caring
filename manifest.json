@@ -7,7 +7,7 @@
         "activeTab",
         "storage",
         "declarativeContent",
-        "notifications",
+        "notifications"
     ],
     "icons" : {
         "16": "images/ruby.png"
